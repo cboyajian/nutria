@@ -35,7 +35,8 @@ plot_k <- ggplot(data = stream_data, aes(x = sample_date, y = k)) +
   scale_x_date(limits = c(as.Date("1989-01-01"), as.Date("1994-07-01"))) +
   labs(x = "Year", 
        y = "K mg l\u207b\u00b9") +
-  theme(axis.text.x = element_blank())
+  theme(axis.text.x = element_blank(),
+        axis.title.x = element_blank())
 
 plot_no3 <- ggplot(data = stream_data, aes(x = sample_date, y = no3)) +
   geom_line(aes(linetype = sample_id), show.legend = FALSE) +
