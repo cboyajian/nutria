@@ -13,12 +13,12 @@ library(janitor)
 ```
 
 ```{r include=FALSE}
-list.files(path = here("raw-data"))
+list.files(path = "/courses/EDS214/nutria/raw-data")
 
-bq1 <- read_csv(here("raw-data", "QuebradaCuenca1-Bisley.csv"))
-bq2 <- read_csv(here("raw-data", "QuebradaCuenca2-Bisley.csv"))
-bq3 <- read_csv(here("raw-data", "QuebradaCuenca3-Bisley.csv"))
-prm <- read_csv(here("raw-data", "RioMameyesPuenteRoto.csv"))
+bq1 <- read_csv("/courses/EDS214/nutria/raw-data/QuebradaCuenca1-Bisley.csv")
+bq2 <- read_csv("/courses/EDS214/nutria/raw-data/QuebradaCuenca2-Bisley.csv")
+bq3 <- read_csv("/courses/EDS214/nutria/raw-data/QuebradaCuenca3-Bisley.csv")
+prm <- read_csv("/courses/EDS214/nutria/raw-data/RioMameyesPuenteRoto.csv")
 ```
 
 
