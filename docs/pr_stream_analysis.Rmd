@@ -10,15 +10,21 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(here)
 library(janitor)
+library(lubridate)
 ```
 
 ```{r include=FALSE}
 list.files(path = "/courses/EDS214/nutria/raw-data")
 
-bq1 <- read_csv("/courses/EDS214/nutria/raw-data/QuebradaCuenca1-Bisley.csv")
-bq2 <- read_csv("/courses/EDS214/nutria/raw-data/QuebradaCuenca2-Bisley.csv")
-bq3 <- read_csv("/courses/EDS214/nutria/raw-data/QuebradaCuenca3-Bisley.csv")
-prm <- read_csv("/courses/EDS214/nutria/raw-data/RioMameyesPuenteRoto.csv")
+bq1 <- read_csv("/courses/EDS214/nutria/raw-data/QuebradaCuenca1-Bisley.csv", na = c("-9999", "-9999.00"))
+bq2 <- read_csv("/courses/EDS214/nutria/raw-data/QuebradaCuenca2-Bisley.csv", na = c("-9999", "-9999.00"))
+bq3 <- read_csv("/courses/EDS214/nutria/raw-data/QuebradaCuenca3-Bisley.csv", na = c("-9999", "-9999.00"))
+prm <- read_csv("/courses/EDS214/nutria/raw-data/RioMameyesPuenteRoto.csv", na = c("-9999", "-9999.00"))
+
+stream_data <- rbind(bq1, bq2, bq3, prm) %>% 
+  clean_names() %>% 
+  select(sample_id, sample_date, no3, k) %>% 
+  mutate(sample_date = mdy(sample_date))
 ```
 
 
