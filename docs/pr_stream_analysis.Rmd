@@ -14,6 +14,11 @@ library(janitor)
 
 ```{r include=FALSE}
 list.files(path = here("raw-data"))
+
+bq1 <- read_csv(here("raw-data", "QuebradaCuenca1-Bisley.csv"))
+bq2 <- read_csv(here("raw-data", "QuebradaCuenca2-Bisley.csv"))
+bq3 <- read_csv(here("raw-data", "QuebradaCuenca3-Bisley.csv"))
+prm <- read_csv(here("raw-data", "RioMameyesPuenteRoto.csv"))
 ```
 
 
