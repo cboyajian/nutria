@@ -17,7 +17,9 @@ library(lubridate)
 list.files(path = "/courses/EDS214/nutria/raw-data")
 
 bq1 <- read_csv("/courses/EDS214/nutria/raw-data/QuebradaCuenca1-Bisley.csv", na = c("-9999", "-9999.00"))
-bq2 <- read_csv("/courses/EDS214/nutria/raw-data/QuebradaCuenca2-Bisley.csv", na = c("-9999", "-9999.00"))
+bq2 <- read_csv("/courses/EDS214/nutria/raw-data/QuebradaCuenca2-Bisley.csv", na = c("-9999", "-9999.00")) %>% 
+  separate(col = Sample_Date, into = c("Sample_Date", "time"), sep = " ") %>% 
+  select(-time)
 bq3 <- read_csv("/courses/EDS214/nutria/raw-data/QuebradaCuenca3-Bisley.csv", na = c("-9999", "-9999.00"))
 prm <- read_csv("/courses/EDS214/nutria/raw-data/RioMameyesPuenteRoto.csv", na = c("-9999", "-9999.00"))
 
