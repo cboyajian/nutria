@@ -30,3 +30,36 @@ stream_data <- rbind(bq1, bq2, bq3, prm) %>%
 ```
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+ggplot(data = stream_data, aes(x = sample_date, y = no3, color = sample_id)) +
+  geom_line() +
+  geom_vline(xintercept = as.Date("1989-12-01")) +
+  scale_color_viridis_d() +
+  scale_x_date(limits = c(as.Date("1988-01-01"), as.Date("1994-07-01"))) +
+  labs(x = "Date", y = "NO\u2083 -N\u00b5l\u207b\u00b9", color = 'Site') +
+  theme_minimal()
+```
+
