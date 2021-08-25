@@ -34,7 +34,8 @@ plot_k <- ggplot(data = stream_data, aes(x = sample_date, y = k / 2)) +
   geom_vline(xintercept = as.Date("1989-10-01"), linetype = "dashed") +
   scale_x_date(limits = c(as.Date("1989-01-01"), as.Date("1994-07-01"))) +
   labs(x = "Year", 
-       y = "K mg l\u207b\u00b9") +
+       y = "K mg l\u207b\u00b9",
+       linetype = "") +
   theme(axis.text.x = element_blank(),
         axis.title.x = element_blank())
 
