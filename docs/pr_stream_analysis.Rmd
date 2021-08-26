@@ -69,7 +69,7 @@ plot_no3 <- ggplot(data = stream_data, aes(x = sample_date, y = no3 / 3)) +
 ```
 
 ```{r}
-plot_combo <- plot_k / plot_no3 
+plot_combo <- plot_k / plot_no3
 
 plot_combo
 ```
