@@ -5,6 +5,11 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(here)
+library(janitor)
+library(lubridate)
+library(patchwork)
 ```
 
 ```{r include=FALSE}
@@ -61,7 +66,7 @@ plot_k <- ggplot(data = stream_data, aes(x = sample_date, y = k)) +
        linetype = "",
        tag = "(a)")  +
   theme_classic() +
-  theme(legend.position = c(1,0.75),
+  theme(legend.position = c(1,0.6),
         panel.border = element_rect(fill = NA, size = 1),
         plot.margin = margin(0, 2, 0, 0, "cm"),
         plot.tag.position = c(0.1, 0.75))
