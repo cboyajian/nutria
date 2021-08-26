@@ -1,0 +1,39 @@
+---
+title: "Nutria Presentation"
+output: 
+  slidy_presentation:
+    image: nutria.png
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Goal
+
+
+## Step 1: Save data, create repository (Project Set-up & Team Organization)
+
+
+## Step 2: Load libraries
+
+
+## Step 3: Read & Munging Data
+
+
+## Step 4: Creating Initial Plots
+
+
+## Step 5: Beautify-ing Plots
+
+
+## Results
+
+
+## Challenge
+
+
+## Repository
+
+
+
