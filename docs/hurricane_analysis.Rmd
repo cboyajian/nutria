@@ -1,0 +1,106 @@
+---
+title: "Looking for Hurricanes"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(here)
+library(janitor)
+library(lubridate)
+library(patchwork)
+```
+
+```{r include=FALSE}
+list.files(path = "/courses/EDS214/nutria/raw-data")
+
+bq1 <- read_csv("/courses/EDS214/nutria/raw-data/QuebradaCuenca1-Bisley.csv", na = c("-9999", "-9999.00"))
+bq2 <- read_csv("/courses/EDS214/nutria/raw-data/QuebradaCuenca2-Bisley.csv", na = c("-9999", "-9999.00")) %>% 
+  separate(col = Sample_Date, into = c("Sample_Date", "time"), sep = " ") %>% 
+  select(-time)
+bq3 <- read_csv("/courses/EDS214/nutria/raw-data/QuebradaCuenca3-Bisley.csv", na = c("-9999", "-9999.00"))
+prm <- read_csv("/courses/EDS214/nutria/raw-data/RioMameyesPuenteRoto.csv", na = c("-9999", "-9999.00"))
+
+stream_data <- rbind(bq1, bq2, bq3, prm) %>% 
+  clean_names() %>% 
+  select(sample_id, sample_date, no3, k) %>% 
+  mutate(sample_date = mdy(sample_date),
+         sample_id = case_when(
+           sample_id == "MPR" ~ "PRM",
+           sample_id == "Q1" ~ "BQ1",
+           sample_id == "Q2" ~ "BQ2",
+           sample_id == "Q3" ~ "BQ3"),
+         sample_id = factor(sample_id, level = c("PRM", "BQ1", "BQ2", "BQ3")))
+```
+
+```{r include=FALSE}
+plot_k <- ggplot(data = stream_data, aes(x = sample_date, y = k)) +
+  geom_line(aes(linetype = sample_id)) +
+  geom_vline(xintercept = as.Date("1989-09-10"), 
+             linetype = "dashed",
+             color = "red") +
+  geom_text(x = as.Date("1989-09-10"), 
+            y = 3.5, 
+            label = "Hugo",
+            color = "red") +
+  geom_vline(xintercept = as.Date("1998-09-21"),
+             linetype = "dashed",
+             color = "orange") +
+  geom_text(x = as.Date("1998-09-21"),
+            y = 3.5,
+            label = "Georges",
+            color = "orange") +
+  geom_vline(xintercept = as.Date("2011-08-14"),
+             linetype = "dashed",
+             color = "blue") +
+  geom_text(x = as.Date("2011-08-14"),
+            y = 3.5,
+            label = "Irene",
+            color = "blue") +
+  scale_x_date(date_breaks = "5 year", 
+               date_labels = "%Y", 
+               position = "top") +
+  labs(x = "Years", 
+       y = "K mg l\u207b\u00b9",
+       linetype = "",
+       tag = "(a)")  +
+  theme_classic() +
+  theme(legend.position = c(1,0.6),
+        panel.border = element_rect(fill = NA, size = 1),
+        plot.margin = margin(0, 2, 0, 0, "cm"),
+        plot.tag.position = c(0.1, 0.75))
+```
+
+```{r include=FALSE}
+plot_no3 <- ggplot(data = stream_data, aes(x = sample_date, y = no3)) +
+  geom_line(aes(linetype = sample_id), show.legend = FALSE) +
+  geom_vline(xintercept = as.Date("1989-09-10"), 
+             linetype = "dashed", 
+             color = "red") +
+  geom_vline(xintercept = as.Date("1998-09-21"),
+             linetype = "dashed",
+             color = "orange") +
+    geom_vline(xintercept = as.Date("2011-08-14"),
+             linetype = "dashed",
+             color = "blue") +
+  scale_x_date(date_breaks = "5 year", 
+               date_labels = "%Y") +
+  labs(x = "Year", 
+      y = "NO\u2083\u2010N \u00b5g l\u207b\u00b9",
+      tag = "(b)") +
+  theme_classic() +
+  theme(axis.text.x = element_blank(),
+        axis.title.x = element_blank(),
+        panel.border = element_rect(fill = NA, size = 1),
+        plot.margin = margin(0, 2, 0, 0, "cm"),
+        plot.tag.position = c(0.1, 0.9))
+
+```
+
+```{r}
+plot_combo <- plot_k / plot_no3
+
+plot_combo
+```
+
