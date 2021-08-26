@@ -27,40 +27,62 @@ prm <- read_csv("/courses/EDS214/nutria/raw-data/RioMameyesPuenteRoto.csv", na =
 stream_data <- rbind(bq1, bq2, bq3, prm) %>% 
   clean_names() %>% 
   select(sample_id, sample_date, no3, k) %>% 
-  mutate(sample_date = mdy(sample_date))
-
+  mutate(sample_date = mdy(sample_date),
+         sample_id = case_when(
+           sample_id == "MPR" ~ "PRM",
+           sample_id == "Q1" ~ "BQ1",
+           sample_id == "Q2" ~ "BQ2",
+           sample_id == "Q3" ~ "BQ3"),
+         sample_id = factor(sample_id, level = c("PRM", "BQ1", "BQ2", "BQ3")))
 ```
 
-```{r}
-k <- ggplot(data = stream_data, aes(x = sample_date, y = k / 2, color = sample_id)) +
-  geom_vline(xintercept = as.Date("1989-10-01"), linetype = "dashed") +
+```{r include=FALSE}
+plot_k <- ggplot(data = stream_data, aes(x = sample_date, y = k / 2)) +
   geom_line(aes(linetype = sample_id)) +
-  scale_color_viridis_d() +
-  scale_x_date(limits = c(as.Date("1988-01-01"), as.Date("1994-07-01"))) +
-  labs(x = NULL, y = "K mg l\u207b\u00b9", color = 'Site', linetype = "Site") +
+  geom_vline(xintercept = as.Date("1989-10-01"), 
+             linetype = "dashed") +
+  scale_x_date(limits = c(as.Date("1989-01-01"), 
+                          as.Date("1994-07-01")), 
+               date_breaks = "1 year", 
+               date_labels = "%Y", 
+               position = "top") +
+  labs(x = "Years", 
+       y = "K mg l\u207b\u00b9",
+       linetype = "",
+       tag = "(a)")  +
+  theme_classic() +
+  theme(#axis.text.x = element_blank(),
+        #axis.title.x = element_blank(),
+        legend.position = c(0.9,0.4),
+        panel.border = element_rect(fill = NA, size = 1),
+        plot.margin = margin(0, 0, 0, 0, "cm"),
+        plot.tag.position = c(0.1, 0.75))
+```
+
+```{r include=FALSE}
+plot_no3 <- ggplot(data = stream_data, aes(x = sample_date, y = no3 / 3)) +
+  geom_line(aes(linetype = sample_id), show.legend = FALSE) +
+  geom_vline(xintercept = as.Date("1989-10-01"), 
+             linetype = "dashed") +
+  scale_x_date(limits = c(as.Date("1989-01-01"), 
+                          as.Date("1994-07-01")), 
+               date_breaks = "1 year", 
+               date_labels = "%Y") +
+  labs(x = "Year", 
+      y = "NO\u2083\u2010N \u00b5g l\u207b\u00b9",
+      tag = "(b)") +
   theme_classic() +
   theme(axis.text.x = element_blank(),
-        panel.border = element_rect(fill = NA, size = 1))
-k
-theme_
+        axis.title.x = element_blank(),
+        panel.border = element_rect(fill = NA, size = 1),
+        plot.margin = margin(0, 0, 0, 0, "cm"),
+        plot.tag.position = c(0.1, 0.9))
+
 ```
 
 ```{r}
-n <- ggplot(data = stream_data, aes(x = sample_date, y = no3 / 3, color = sample_id)) +
-  geom_vline(xintercept = as.Date("1989-10-01"), linetype = "dashed") +
-  geom_line(aes(linetype = sample_id)) +
-  scale_color_viridis_d() +
-  scale_x_date(limits = c(as.Date("1988-01-01"), as.Date("1994-07-01"))) +
-  # scale_y_continuous(limits = c(NA, 500)) +
-  labs(x = "Date", y = "NO\u2083 -N\u00b5l\u207b\u00b9", color = 'Site', linetype = "Site") +
-  theme_classic() +
-  theme(legend.position = "none")
+plot_combo <- plot_k / plot_no3
+
+plot_combo
 ```
-
-```{r}
-k / n
-```
-
-
-
 
