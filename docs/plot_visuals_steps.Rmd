@@ -199,6 +199,6 @@ plot_combo_3 <- plot_k_3 / plot_no3_3
 
 plot_combo_3
 
-ggsave(here::here("figs", "plot_combo_"))
+ggsave(here::here("figs", "plot_combo_1980-2012.png"))
 ```
 
