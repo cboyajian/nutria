@@ -29,8 +29,6 @@ stream_data <- rbind(bq1, bq2, bq3, prm) %>%
   select(sample_id, sample_date, no3, k) %>% 
   mutate(sample_date = mdy(sample_date))
 
-ggplot(data = stream_data, aes(x = sample_date, y = k)) +
-  geom_line(aes(color = sample_id))
 ```
 
 ```{r}
