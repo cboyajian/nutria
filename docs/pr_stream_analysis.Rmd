@@ -34,7 +34,7 @@ stream_data <- rbind(bq1, bq2, bq3, prm) %>%
 plot_k <- ggplot(data = stream_data, aes(x = sample_date, y = k / 2)) +
   geom_line(aes(linetype = sample_id)) +
   geom_vline(xintercept = as.Date("1989-10-01"), linetype = "dashed") +
-  scale_x_date(limits = c(as.Date("1989-01-01"), as.Date("1994-07-01"))) +
+  scale_x_date(limits = c(as.Date("1989-01-01"), as.Date("1994-07-01")), date_breaks = "1 year") +
   labs(x = "Year", 
        y = "K mg l\u207b\u00b9",
        linetype = "")  +
@@ -50,7 +50,7 @@ plot_k <- ggplot(data = stream_data, aes(x = sample_date, y = k / 2)) +
 plot_no3 <- ggplot(data = stream_data, aes(x = sample_date, y = no3 / 3)) +
   geom_line(aes(linetype = sample_id), show.legend = FALSE) +
   geom_vline(xintercept = as.Date("1989-10-01"), linetype = "dashed") +
-  scale_x_date(limits = c(as.Date("1989-01-01"), as.Date("1994-07-01"))) +
+  scale_x_date(limits = c(as.Date("1989-01-01"), as.Date("1994-07-01")), date_breaks = "1 year", date_labels = "%Y") +
   # geom_vline(xintercept = as.Date("1989-10-01")) +
   labs(x = "Year", 
       y = "NO\u2083\u2010N \u00b5g l\u207b\u00b9") +
