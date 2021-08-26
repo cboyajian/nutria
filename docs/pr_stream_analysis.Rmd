@@ -39,7 +39,10 @@ k <- ggplot(data = stream_data, aes(x = sample_date, y = k / 2, color = sample_i
   scale_x_date(limits = c(as.Date("1988-01-01"), as.Date("1994-07-01"))) +
   labs(x = NULL, y = "K mg l\u207b\u00b9", color = 'Site', linetype = "Site") +
   theme_classic() +
-  theme(axis.text.x = element_blank())
+  theme(axis.text.x = element_blank(),
+        panel.border = element_rect(fill = NA, size = 1))
+k
+theme_
 ```
 
 ```{r}
