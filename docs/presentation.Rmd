@@ -1,8 +1,10 @@
 ---
 title: "Nutria Presentation"
+author: Alex,  Austin,  Clarissa,  Cullen
+date: 2021-08-27
 output: 
   slidy_presentation:
-    image: nutria.png
+    logo: nutria.png
 ---
 
 ```{r setup, include=FALSE}
@@ -10,7 +12,8 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 ## Goal
-
+- **Reproduce the nitrate and potassium plot for Hurricane Hugo in Luquillo, Puerto Rico.**
+- Investigate broader hurricane impact on stream chemistry data.
 
 ## Step 1: Save data, create repository (Project Set-up & Team Organization)
 
