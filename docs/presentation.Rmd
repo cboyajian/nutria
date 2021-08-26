@@ -1,0 +1,51 @@
+---
+title: "Nutria Presentation"
+output: 
+  slidy_presentation:
+    image: nutria.png
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Goal
+
+
+## Step 1: Save data, create repository (Project Set-up & Team Organization)
+
+
+## Step 2: Load libraries
+
+We knew we'd need the standard libraries we've been working with for data wrangling and plotting. We started with tidyverse, here, and janitor.
+```{r}
+library(tidyverse)
+library(here)
+library(janitor)
+```
+
+Later on in the data wrangling process, we realized we would need a few additional packages. `lubridate` facilitated the use of date data, and we used `patchwork` to compile faceted graphs.
+```{r}
+library(lubridate)
+library(patchwork)
+```
+
+## Step 3: Read & Munging Data
+
+
+## Step 4: Creating Initial Plots
+
+
+## Step 5: Beautify-ing Plots
+
+
+## Results
+
+
+## Challenge
+
+
+## Repository
+
+
+
