@@ -5,6 +5,9 @@ date: 2021-08-27
 output: 
   slidy_presentation:
     logo: nutria.png
+output: 
+  slidy_presentation:
+    image: nutria.png
 ---
 
 ```{r setup, include=FALSE}
@@ -20,6 +23,18 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Step 2: Load libraries
 
+We knew we'd need the standard libraries we've been working with for data wrangling and plotting. We started with tidyverse, here, and janitor.
+```{r}
+library(tidyverse)
+library(here)
+library(janitor)
+```
+
+Later on in the data wrangling process, we realized we would need a few additional packages. `lubridate` facilitated the use of date data, and we used `patchwork` to compile faceted graphs.
+```{r}
+library(lubridate)
+library(patchwork)
+```
 
 ## Step 3: Read & Munging Data
 
