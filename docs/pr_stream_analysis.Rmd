@@ -11,6 +11,7 @@ library(tidyverse)
 library(here)
 library(janitor)
 library(lubridate)
+library(patchwork)
 ```
 
 ```{r include=FALSE}
@@ -32,4 +33,30 @@ ggplot(data = stream_data, aes(x = sample_date, y = k)) +
   geom_line(aes(color = sample_id))
 ```
 
+```{r}
+k <- ggplot(data = stream_data, aes(x = sample_date, y = k / 2, color = sample_id)) +
+  geom_vline(xintercept = as.Date("1989-10-01"), linetype = "dashed") +
+  geom_line(aes(linetype = sample_id)) +
+  scale_color_viridis_d() +
+  scale_x_date(limits = c(as.Date("1988-01-01"), as.Date("1994-07-01"))) +
+  labs(x = NULL, y = "K mg l\u207b\u00b9", color = 'Site', linetype = "Site") +
+  theme_classic() +
+  theme(axis.text.x = element_blank())
+```
+
+```{r}
+n <- ggplot(data = stream_data, aes(x = sample_date, y = no3 / 3, color = sample_id)) +
+  geom_vline(xintercept = as.Date("1989-10-01"), linetype = "dashed") +
+  geom_line(aes(linetype = sample_id)) +
+  scale_color_viridis_d() +
+  scale_x_date(limits = c(as.Date("1988-01-01"), as.Date("1994-07-01"))) +
+  # scale_y_continuous(limits = c(NA, 500)) +
+  labs(x = "Date", y = "NO\u2083 -N\u00b5l\u207b\u00b9", color = 'Site', linetype = "Site") +
+  theme_classic() +
+  theme(legend.position = "none")
+```
+
+```{r}
+k / n
+```
 
