@@ -1,0 +1,73 @@
+---
+output: 
+  html_document:
+    code_folding: hide
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(warning = FALSE)
+library(tidyverse)
+library(here)
+library(janitor)
+library(lubridate)
+library(patchwork)
+```
+
+```{r include=FALSE}
+# Listing what data files are available
+list.files(path = "/courses/EDS214/nutria/raw-data")
+# Watershed 1
+bq1 <- read_csv("/courses/EDS214/nutria/raw-data/QuebradaCuenca1-Bisley.csv", na = c("-9999", "-9999.00"))
+bq2 <- read_csv("/courses/EDS214/nutria/raw-data/QuebradaCuenca2-Bisley.csv", na = c("-9999", "-9999.00")) %>% 
+  separate(col = Sample_Date, into = c("Sample_Date", "time"), sep = " ") %>% 
+  select(-time)
+bq3 <- read_csv("/courses/EDS214/nutria/raw-data/QuebradaCuenca3-Bisley.csv", na = c("-9999", "-9999.00"))
+prm <- read_csv("/courses/EDS214/nutria/raw-data/RioMameyesPuenteRoto.csv", na = c("-9999", "-9999.00"))
+
+stream_data <- rbind(bq1, bq2, bq3, prm) %>% 
+  clean_names() %>% 
+  select(sample_id, sample_date, no3, k) %>% 
+  mutate(sample_date = mdy(sample_date),
+         sample_id = case_when(
+           sample_id == "MPR" ~ "PRM",
+           sample_id == "Q1" ~ "BQ1",
+           sample_id == "Q2" ~ "BQ2",
+           sample_id == "Q3" ~ "BQ3"),
+         sample_id = factor(sample_id, level = c("PRM", "BQ1", "BQ2", "BQ3")))
+
+# Watershed 2
+qpb <- read_csv("/courses/EDS214/nutria/raw-data/QuebradaPrieta-B.csv", na = c("-9999", "-9999.00"))
+qpa <- read_csv("/courses/EDS214/nutria/raw-data/QuebradaPrieta-A.csv", na = c("-9999", "-9999.00"))
+qs <- read_csv("/courses/EDS214/nutria/raw-data/QuebradaSonadora.csv", na = c("-9999", "-9999.00"))
+
+stream_data_2 <- rbind(qpb, qpa, qs) %>% 
+  clean_names() %>% 
+  select(sample_id, sample_date, no3, k, mg, ca, nh4_n) %>% 
+  mutate(sample_date = mdy(sample_date),
+         sample_id = factor(sample_id, level = c("QS", "QPA", "QPB")),
+         k = k / 2,
+         no3 = no3 / 2) %>% 
+  pivot_longer(cols = 3:7, names_to = "chem", values_to = "concentration") %>% 
+  mutate(chem = case_when(
+    chem == "k" ~ "K mg l\u207b\u00b9",
+    chem == "no3" ~ "NO\u2083\u2010N \u00b5g l\u207b\u00b9",
+    chem == "nh4_n" ~ "NH\u2084\u2010N \u00b5g l\u207b\u00b9",
+    chem == "ca" ~ "Ca mg  l\u207b\u00b9",
+    chem == "mg" ~ "Mg mg  l\u207b\u00b9"),
+    chem = factor(chem, levels = c("K mg l⁻¹", "NO₃‐N µg l⁻¹", "Mg mg  l\u207b\u00b9", "Ca mg  l⁻¹", "NH₄‐N µg l⁻¹")))
+```
+
+```{r fig.width=7.5, fig.height=11}
+ggplot(data = stream_data_2, aes(x = sample_date, y = concentration, linetype = sample_id, color = sample_id)) +
+  geom_line() +
+  scale_color_viridis_d() +
+  facet_wrap(~chem, ncol = 1, scales = "free", strip.position = "top") +
+  labs(x = "Years", 
+       y = NULL,
+       color = NULL,
+       linetype = NULL) +
+  theme_classic() +
+  theme(legend.position = c(.9, .725))
+```
