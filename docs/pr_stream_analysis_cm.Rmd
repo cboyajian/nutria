@@ -56,7 +56,12 @@ stream_data_2 <- rbind(qpb, qpa, qs) %>%
     chem == "nh4_n" ~ "NH\u2084\u2010N \u00b5g l\u207b\u00b9",
     chem == "ca" ~ "Ca mg  l\u207b\u00b9",
     chem == "mg" ~ "Mg mg  l\u207b\u00b9"),
-    chem = factor(chem, levels = c("K mg l⁻¹", "NO₃‐N µg l⁻¹", "Mg mg  l\u207b\u00b9", "Ca mg  l⁻¹", "NH₄‐N µg l⁻¹")))
+    chem = factor(
+      chem, levels = c("K mg l\u207b\u00b9", 
+                       "NO\u2083\u2010N \u00b5g l\u207b\u00b9", 
+                       "Mg mg  l\u207b\u00b9", 
+                       "Ca mg  l\u207b\u00b9",
+                       "NH\u2084\u2010N \u00b5g l\u207b\u00b9")))
 ```
 
 ```{r fig.width=7.5, fig.height=11}

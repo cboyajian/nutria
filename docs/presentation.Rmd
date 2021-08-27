@@ -103,8 +103,98 @@ library(patchwork)
 
 ---
 
-# Step 3: Read & Munging Data [Cullen]
+# Step 3: Reading & Munging the Data 
 
+```{r}
+# Listing what data files are available
+list.files(path = "/courses/EDS214/nutria/raw-data")
+```
+
+---
+
+# Reading Data for Plot 1
+
+```{r}
+# Watershed 1
+bq1 <- read_csv(
+  "/courses/EDS214/nutria/raw-data/QuebradaCuenca1-Bisley.csv",
+  na = c("-9999", "-9999.00"), show_col_types = FALSE)
+
+bq2 <- read_csv( #<<
+  "/courses/EDS214/nutria/raw-data/QuebradaCuenca2-Bisley.csv", #<<
+  na = c("-9999", "-9999.00"), show_col_types = FALSE) %>% #<<
+  separate(col = Sample_Date, #<<
+         into = c("Sample_Date", "time"), #<<
+          sep = " ") %>% #<<
+  select(-time) #<<
+
+bq3 <- read_csv(
+  "/courses/EDS214/nutria/raw-data/QuebradaCuenca3-Bisley.csv", 
+  na = c("-9999", "-9999.00"), show_col_types = FALSE)
+
+prm <- read_csv(
+  "/courses/EDS214/nutria/raw-data/RioMameyesPuenteRoto.csv", 
+  na = c("-9999", "-9999.00"), show_col_types = FALSE)
+```
+
+---
+
+# Munging Plot 1 Data
+
+```{r}
+stream_data <- rbind(bq1, bq2, bq3, prm) %>% 
+  clean_names() %>% 
+  select(sample_id, sample_date, no3, k) %>% 
+  mutate(
+    sample_date = mdy(sample_date),
+    sample_id = case_when(
+      sample_id == "MPR" ~ "PRM",
+      sample_id == "Q1" ~ "BQ1",
+      sample_id == "Q2" ~ "BQ2",
+      sample_id == "Q3" ~ "BQ3"),
+    sample_id = factor(
+      sample_id, 
+      levels = c("PRM", "BQ1", "BQ2", "BQ3")))
+```
+
+---
+
+# Munging Plot 2 Data
+
+```{r include=FALSE}
+# Watershed 2
+qpb <- read_csv("/courses/EDS214/nutria/raw-data/QuebradaPrieta-B.csv", na = c("-9999", "-9999.00"))
+qpa <- read_csv("/courses/EDS214/nutria/raw-data/QuebradaPrieta-A.csv", na = c("-9999", "-9999.00"))
+qs <- read_csv("/courses/EDS214/nutria/raw-data/QuebradaSonadora.csv", na = c("-9999", "-9999.00"))
+stream_data_2 <- rbind(qpb, qpa, qs) %>% 
+  clean_names() %>% 
+  select(sample_id, sample_date, no3, k, mg, ca, nh4_n) %>% 
+  mutate(sample_date = mdy(sample_date),
+         sample_id = factor(
+           sample_id, level = c("QS", "QPA", "QPB")),
+         k = k / 2,
+         no3 = no3 / 2)
+```
+
+```{r}
+stream_data_2 <- stream_data_2 %>% 
+  pivot_longer(cols = 3:7, names_to = "chem", # Make Data tidy  #<<
+               values_to = "concentration") %>%  #<< 
+  mutate(
+    chem = case_when( # Use unicode to make nice labels #<<
+      chem == "k" ~ "K mg l\u207b\u00b9", #<<
+      chem == "no3" ~ "NO\u2083\u2010N \u00b5g l\u207b\u00b9",
+      chem == "nh4_n" ~ "NH\u2084\u2010N \u00b5g l\u207b\u00b9",
+      chem == "ca" ~ "Ca mg l\u207b\u00b9",
+      chem == "mg" ~ "Mg mg l\u207b\u00b9"),
+    chem = factor(
+      chem, levels = c( # Factor and set levels #<<
+        "K mg l\u207b\u00b9",  #<<
+        "NO\u2083\u2010N \u00b5g l\u207b\u00b9", 
+        "Mg mg l\u207b\u00b9", 
+        "Ca mg l\u207b\u00b9",
+        "NH\u2084\u2010N \u00b5g l\u207b\u00b9")))
+```
 
 ---
 
@@ -176,8 +266,89 @@ class: split-two
 
 ---
 
-# Results [Cullen]
+# Finding Hurricanes
 
+```{r echo=FALSE, fig.width=12, fig.height=6}
+plot_k_3 <- ggplot(data = stream_data, aes(x = sample_date, y = k)) +
+  geom_line(aes(linetype = sample_id)) +
+  geom_vline(xintercept = as.Date("1989-09-10"), 
+             linetype = "dashed",
+             color = "red") +
+  geom_text(x = as.Date("1989-09-10"), 
+            y = 3.5, hjust = 1,
+            label = "Hugo",
+            color = "red") +
+  geom_vline(xintercept = as.Date("1998-09-15"),
+             linetype = "dashed",
+             color = "orange") +
+  geom_text(x = as.Date("1998-09-15"),
+            y = 3.5, hjust = 1,
+            label = "Georges",
+            color = "orange") +
+  geom_vline(xintercept = as.Date("2010-10-06"),
+             linetype = "dashed",
+             color = "blue") +
+  geom_text(x = as.Date("2010-10-06"),
+            y = 3.5, hjust = 1,
+            label = "Otto",
+            color = "blue") +
+  scale_x_date(date_breaks = "5 year", 
+               date_labels = "%Y", 
+               position = "top") +
+  labs(x = "Years", 
+       y = "K mg l\u207b\u00b9",
+       linetype = "",
+       tag = "(a)")  +
+  theme_classic() +
+  theme(legend.position = "right",
+        panel.border = element_rect(fill = NA, size = 1),
+        plot.margin = margin(0, 2, 0, 0, "cm"),
+        plot.tag.position = c(0.125, 0.75))
+
+
+plot_no3_3 <- ggplot(data = stream_data, aes(x = sample_date, y = no3)) +
+  geom_line(aes(linetype = sample_id), show.legend = FALSE) +
+  geom_vline(xintercept = as.Date("1989-09-10"), 
+             linetype = "dashed", 
+             color = "red") +
+  geom_vline(xintercept = as.Date("1998-09-15"),
+             linetype = "dashed",
+             color = "orange") +
+    geom_vline(xintercept = as.Date("2010-10-06"),
+             linetype = "dashed",
+             color = "blue") +
+  scale_x_date(date_breaks = "5 year", 
+               date_labels = "%Y") +
+  labs(x = "Year", 
+      y = "NO\u2083\u2010N \u00b5g l\u207b\u00b9",
+      tag = "(b)") +
+  theme_classic() +
+  theme(axis.text.x = element_blank(),
+        axis.title.x = element_blank(),
+        panel.border = element_rect(fill = NA, size = 1),
+        plot.margin = margin(0, 2, 0, 0, "cm"),
+        plot.tag.position = c(0.125, 0.9))
+
+
+plot_combo_3 <- plot_k_3 / plot_no3_3
+
+plot_combo_3
+```
+---
+Expanding the search with a second watershed and more chemicals
+```{r fig.height=8, fig.width=10, echo=FALSE, warning=FALSE}
+ggplot(data = stream_data_2, aes(x = sample_date, y = concentration, linetype = sample_id, color = sample_id)) +
+  geom_line() +
+  scale_color_viridis_d() +
+  facet_wrap(~chem, ncol = 1, scales = "free_y") +
+  scale_x_date(date_breaks = "2 year", date_labels = "%Y") +
+  labs(x = "Years", 
+       y = NULL,
+       color = NULL,
+       linetype = NULL) +
+  theme_classic() +
+  theme(legend.position = c(.9, .725))
+```
 
 ---
 
