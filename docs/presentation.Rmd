@@ -33,21 +33,17 @@ style_duo(primary_color = "#1F4257", secondary_color = "#F97B64")
 ---
 
 # Team Organization [Alex]
-Alex: Nimble Navigator
+**- Alex: Nimble Navigator**
+  - Dove into metadata and helped with plot direction
 
-- Dove into metadata and helped with plot direction
+**- Austin: Git Guru**
+  - Solved merge conflicts, resurrected plots, and kept the team afloat
 
-Austin: Git Guru
+**- Clarissa: Code Captain**
+  - Created the code and styled plots
 
-- Solved merge conflicts, resurrected plots, and kept the team afloat
-
-Clarissa: Code Captain
-
-- Created the code and styled plots
-
-Cullen: Plot Pundit
-
-- Produced all custom ggplot themes and features
+**- Cullen: Plot Pundit**
+  - Produced all custom ggplot themes and features
 
 ---
 
