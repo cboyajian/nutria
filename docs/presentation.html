@@ -5,15 +5,13 @@
     <meta charset="utf-8" />
     <meta name="author" content="Alex, Austin, Clarissa, Cullen" />
     <meta name="date" content="2021-08-27" />
-    <script src="presentation_files/header-attrs-2.10/header-attrs.js"></script>
-    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link href="libs/remark-css-0.0.1/ninjutsu.css" rel="stylesheet" />
   </head>
   <body>
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
 # Nutria Presentation
-## Team swamp rats
 ### Alex, Austin, Clarissa, Cullen
 ### 2021-08-27
 
@@ -22,77 +20,23 @@ class: center, middle, inverse, title-slide
 
 
 
-
-
-&lt;img src="https://i.natgeofe.com/n/71d5c04b-31bd-4331-950c-89de69b6005c/nutria_thumb_square.JPG"
-     alt="nutria" /&gt;
-     
 ---
 
 # Goal
 - **Reproduce the nitrate and potassium plot for Hurricane Hugo in Luquillo, Puerto Rico.**
-
 - Investigate broader hurricane impact on stream chemistry data.
 
 ---
 
-# Team Organization [Alex]
-Alex: Nimble Navigator
+# Project Set-up &amp; Team Organization [Alex]
 
-- Dove into metadata and helped with plot direction
-
-Austin: Git Guru
-
-- Solved merge conflicts, resurrected plots, and kept the team afloat
-
-Clarissa: Code Captain
-
-- Created the code and styled plots
-
-Cullen: Plot Pundit
-
-- Produced all custom ggplot themes and features
 
 ---
 
-# Step 1: Project Set-Up
+# Step 1: Save data, create repository, repository structure [Clarissa]
 
-**- Getting the data**
-  - Downloaded data from EDI Data Portal to Alex's computer
-    McDowell, W. 2021. Chemistry of stream water from the Luquillo Mountains ver 4923052. Environmental Data Initiative
-
-**- Creating a GitHub repository**
-  - Created GitHub repository on Clarissa's github
-    https://github.com/cboyajian/nutria
-  - Invited Alex, Cullen, and Austen to be collaborators
-
-**- Saving the data** 
-  - Upload to GitHub repository (technical issues with saving to server)
-  - Switched back to server
-    - File structure: nutria - docs, figs, raw-data
-    - Used SCP to upload into data folder
 
 ---
-
-# Step 1: Project Set-Up
-
-**- Creating separate branches**
-  - Merge conflicts (small project)
-  - Each work on different branch (communicate verbally)
-
-**- Creating presentation outline using pair programming**
-  - Driver: Austin
-    - Added notes to presentation file
-  - Navigators: Alex, Cullen Clarissa
-    - Slide assignments
-    - General overview of presentation content
-
-** - Creating presentation using GitHub branches**
-  - Each created own branch from outline
-  - Merged together and added final updates
-
----
-
 
 # Step 2: Load libraries
 
@@ -100,66 +44,14 @@ We knew we'd need the standard libraries we've been working with for data wrangl
 
 ```r
 library(tidyverse)
-```
-
-```
-## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
-```
-
-```
-## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
-## ✓ tibble  3.1.3     ✓ dplyr   1.0.7
-## ✓ tidyr   1.1.3     ✓ stringr 1.4.0
-## ✓ readr   2.0.1     ✓ forcats 0.5.1
-```
-
-```
-## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()
-```
-
-```r
 library(here)
-```
-
-```
-## here() starts at /Users/alexclippinger/H/github/nutria
-```
-
-```r
 library(janitor)
-```
-
-```
-## 
-## Attaching package: 'janitor'
-```
-
-```
-## The following objects are masked from 'package:stats':
-## 
-##     chisq.test, fisher.test
 ```
 
 Later on in the data wrangling process, we realized we would need a few additional packages. `lubridate` facilitated the use of date data, and we used `patchwork` to compile faceted graphs.
 
 ```r
 library(lubridate)
-```
-
-```
-## 
-## Attaching package: 'lubridate'
-```
-
-```
-## The following objects are masked from 'package:base':
-## 
-##     date, intersect, setdiff, union
-```
-
-```r
 library(patchwork)
 ```
 
@@ -170,24 +62,58 @@ library(patchwork)
 
 ---
 
-# Step 4: Creating Initial Plots [Austin]
+# Step 4: Creating Initial Plots
 
+Because we were having issues with expiring git tokens, we needed to work on the initial plots individually. Alex, Clarissa, and Cullen all worked on replicating the original plots. We ended up with these three versions. Once our tokens were working again, we decided Clarissa's was best and moved forward with hers.
 
 ---
 
-# Step 5: Beautify-ing Plots &amp; Pair Programming
+class: split-two
 
-**- Pair programming to beautify plots**
-  - Driver: Clarissa
-    - Practice writing out code
-    
-  - Navigators: Alex, Austin, Cullen
-    - Removed margins between plots
-    - Changed header and tick locations
-    - Changed legend location (covered part of data on top plot)
-    - Updated legend names and order
-  
-&lt;img src="../figs/plot_combo.png"&gt;
+.column[
+&lt;img src="../figs/original.png" style="max-height: 200px; width: auto;"&gt;
+&lt;br&gt;Original
+]
+.column[
+&lt;img src="../figs/cullenplot.jpg" style="max-width: 100%; height: auto;"&gt;
+&lt;br&gt;Cullen
+]
+
+---
+
+class: split-two
+
+.column[
+&lt;img src="../figs/original.png" style="max-height: 200px; width: auto;"&gt;
+&lt;br&gt;Original
+]
+.column[
+&lt;img src="../figs/alexplot.jpg" style="max-width: 100%; height: auto;"&gt;
+&lt;br&gt;Alex
+]
+
+---
+
+class: split-two
+
+.column[
+&lt;img src="../figs/original.png" style="max-height: 200px; width: auto;"&gt;
+&lt;br&gt;Original
+]
+.column[
+&lt;img src="../figs/clarissa_og.jpg" style="max-width: 100%; height: auto;"&gt;
+&lt;br&gt;Clarissa
+]
+
+---
+
+# The winner
+
+&lt;img src="../figs/clarissa_og.jpg" style="max-width: 70%; height: auto;"&gt;
+
+---
+
+# Step 5: Beautify-ing Plots &amp; Pair Programming [Clarissa]
 
 
 ---
@@ -211,7 +137,11 @@ The chakra comes from [remark.js](https://remarkjs.com), [**knitr**](https://yih
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
-<script>var slideshow = remark.create();
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
 });
@@ -276,7 +206,24 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
       links[i].target = '_blank';
     }
   }
-})();</script>
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
 
 <script>
 slideshow._releaseMath = function(el) {
