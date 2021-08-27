@@ -5,9 +5,8 @@ author: Alex, Austin, Clarissa, Cullen
 date: 2021-08-27
 output:
   xaringan::moon_reader:
-    css: xaringan-themer.css
+    css: ["ninjutsu", xaringan-themer.css]
 ---
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -111,7 +110,52 @@ library(patchwork)
 
 # Step 4: Creating Initial Plots
 
-Because we were having issues with expiring git tokens, we needed to work on the initial plots individually
+Because we were having issues with expiring git tokens, we needed to work on the initial plots individually. Alex, Clarissa, and Cullen all worked on replicating the original plots. We ended up with these three versions. Once our tokens were working again, we decided Clarissa's was best and moved forward with hers.
+
+---
+
+class: split-two
+
+.column[
+<img src="../figs/original.png" style="max-height: 200px; width: auto;">
+<br>Original
+]
+.column[
+<img src="../figs/cullenplot.jpg" style="max-width: 100%; height: auto;">
+<br>Cullen
+]
+
+---
+
+class: split-two
+
+.column[
+<img src="../figs/original.png" style="max-height: 200px; width: auto;">
+<br>Original
+]
+.column[
+<img src="../figs/alexplot.jpg" style="max-width: 100%; height: auto;">
+<br>Alex
+]
+
+---
+
+class: split-two
+
+.column[
+<img src="../figs/original.png" style="max-height: 200px; width: auto;">
+<br>Original
+]
+.column[
+<img src="../figs/clarissa_og.jpg" style="max-width: 100%; height: auto;">
+<br>Clarissa
+]
+
+---
+
+# The winner
+
+<img src="../figs/clarissa_og.jpg" style="max-width: 70%; height: auto;">
 
 ---
 
