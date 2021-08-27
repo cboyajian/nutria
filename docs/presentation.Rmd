@@ -19,12 +19,22 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Goal
 - **Reproduce the nitrate and potassium plot for Hurricane Hugo in Luquillo, Puerto Rico.**
+
 - Investigate broader hurricane impact on stream chemistry data.
 
 ---
 
-# Project Set-up & Team Organization [Alex]
+# Team Organization [Alex]
+- Alex: Navigator
+Diving into metadata, finding hurricane dates, helping with plot direction
 
+- Austin: Git Guru
+Solving merge conflicts, controlling versions, and keeping the team afloat
+
+- Clarissa: Captain
+
+
+- Cullen: ggplot Wizard
 
 ---
 
