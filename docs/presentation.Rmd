@@ -2,26 +2,38 @@
 title: "Nutria Presentation"
 author: Alex,  Austin,  Clarissa,  Cullen
 date: 2021-08-27
-output: 
-  slidy_presentation:
-    logo: figs/nutria.png
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## Goal
+---
+
+# Goal
 - **Reproduce the nitrate and potassium plot for Hurricane Hugo in Luquillo, Puerto Rico.**
 - Investigate broader hurricane impact on stream chemistry data.
 
-## Project Set-up & Team Organization [Alex]
+---
+
+# Project Set-up & Team Organization [Alex]
 
 
-## Step 1: Save data, create repository, repository structure [Clarissa]
+---
+
+# Step 1: Save data, create repository, repository structure [Clarissa]
 
 
-## Step 2: Load libraries
+---
+
+# Step 2: Load libraries
 
 We knew we'd need the standard libraries we've been working with for data wrangling and plotting. We started with tidyverse, here, and janitor.
 ```{r}
@@ -36,17 +48,36 @@ library(lubridate)
 library(patchwork)
 ```
 
-## Step 3: Read & Munging Data [Cullen]
+---
+
+# Step 3: Read & Munging Data [Cullen]
 
 
-## Step 4: Creating Initial Plots [Austin]
+---
+
+# Step 4: Creating Initial Plots [Austin]
 
 
-## Step 5: Beautify-ing Plots & Pair Programming [Clarissa]
+---
+
+# Step 5: Beautify-ing Plots & Pair Programming [Clarissa]
 
 
-## Results [Cullen]
+---
+
+# Results [Cullen]
 
 
-## Repository 
+---
+
+# Repository 
 (just a link)
+
+
+---
+
+# Thanks!
+
+Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
+
+The chakra comes from [remark.js](https://remarkjs.com), [**knitr**](https://yihui.org/knitr/), and [R Markdown](https://rmarkdown.rstudio.com).
