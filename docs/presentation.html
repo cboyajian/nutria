@@ -5,15 +5,15 @@
     <meta charset="utf-8" />
     <meta name="author" content="Alex, Austin, Clarissa, Cullen" />
     <meta name="date" content="2021-08-27" />
-    <script src="libs/header-attrs-2.10.6/header-attrs.js"></script>
-    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
-    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <script src="presentation_files/header-attrs-2.10/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
 # Nutria Presentation
+## Team swamp rats
 ### Alex, Austin, Clarissa, Cullen
 ### 2021-08-27
 
@@ -22,16 +22,36 @@ class: center, middle, inverse, title-slide
 
 
 
+
+
+&lt;img src="https://i.natgeofe.com/n/71d5c04b-31bd-4331-950c-89de69b6005c/nutria_thumb_square.JPG"
+     alt="nutria" /&gt;
+     
 ---
 
 # Goal
 - **Reproduce the nitrate and potassium plot for Hurricane Hugo in Luquillo, Puerto Rico.**
+
 - Investigate broader hurricane impact on stream chemistry data.
 
 ---
 
-# Project Set-up &amp; Team Organization [Alex]
+# Team Organization [Alex]
+Alex: Nimble Navigator
 
+- Dove into metadata and helped with plot direction
+
+Austin: Git Guru
+
+- Solved merge conflicts, resurrected plots, and kept the team afloat
+
+Clarissa: Code Captain
+
+- Created the code and styled plots
+
+Cullen: Plot Pundit
+
+- Produced all custom ggplot themes and features
 
 ---
 
@@ -70,7 +90,7 @@ library(here)
 ```
 
 ```
-## here() starts at /Users/cboyajian/github/nutria
+## here() starts at /Users/alexclippinger/H/github/nutria
 ```
 
 ```r
@@ -145,11 +165,7 @@ The chakra comes from [remark.js](https://remarkjs.com), [**knitr**](https://yih
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
-<script>var slideshow = remark.create({
-"highlightStyle": "github",
-"highlightLines": true,
-"countIncrementalSlides": false
-});
+<script>var slideshow = remark.create();
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
 });
@@ -214,24 +230,7 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
       links[i].target = '_blank';
     }
   }
-})();
-// adds .remark-code-has-line-highlighted class to <pre> parent elements
-// of code chunks containing highlighted lines with class .remark-code-line-highlighted
-(function(d) {
-  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
-  const preParents = [];
-  const findPreParent = function(line, p = 0) {
-    if (p > 1) return null; // traverse up no further than grandparent
-    const el = line.parentElement;
-    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
-  };
-
-  for (let line of hlines) {
-    let pre = findPreParent(line);
-    if (pre && !preParents.includes(pre)) preParents.push(pre);
-  }
-  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
-})(document);</script>
+})();</script>
 
 <script>
 slideshow._releaseMath = function(el) {
