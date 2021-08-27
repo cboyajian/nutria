@@ -63,7 +63,8 @@ stream_data_2 <- rbind(qpb, qpa, qs) %>%
 ggplot(data = stream_data_2, aes(x = sample_date, y = concentration, linetype = sample_id, color = sample_id)) +
   geom_line() +
   scale_color_viridis_d() +
-  facet_wrap(~chem, ncol = 1, scales = "free", strip.position = "top") +
+  facet_wrap(~chem, ncol = 1, scales = "free_y") +
+  scale_x_date(date_breaks = "2 year", date_labels = "%Y") +
   labs(x = "Years", 
        y = NULL,
        color = NULL,
