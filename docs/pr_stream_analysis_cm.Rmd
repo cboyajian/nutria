@@ -71,4 +71,6 @@ ggplot(data = stream_data_2, aes(x = sample_date, y = concentration, linetype = 
        linetype = NULL) +
   theme_classic() +
   theme(legend.position = c(.9, .725))
+
+ggsave(here("figs", "second_watershed.png"))
 ```
