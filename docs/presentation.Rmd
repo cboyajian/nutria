@@ -1,20 +1,25 @@
 ---
 title: "Nutria Presentation"
+subtitle: "Team swamp rats"
 author: Alex, Austin, Clarissa, Cullen
 date: 2021-08-27
 output:
   xaringan::moon_reader:
-    lib_dir: libs
-    nature:
-      highlightStyle: github
-      highlightLines: true
-      countIncrementalSlides: false
+    css: xaringan-themer.css
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_duo(primary_color = "#1F4257", secondary_color = "#F97B64")
+```
+
+<img src="https://i.natgeofe.com/n/71d5c04b-31bd-4331-950c-89de69b6005c/nutria_thumb_square.JPG"
+     alt="nutria" />
+     
 ---
 
 # Goal
@@ -25,16 +30,21 @@ knitr::opts_chunk$set(echo = TRUE)
 ---
 
 # Team Organization [Alex]
-- Alex: Navigator
-Diving into metadata, finding hurricane dates, helping with plot direction
+Alex: Nimble Navigator
 
-- Austin: Git Guru
-Solving merge conflicts, controlling versions, and keeping the team afloat
+- Dove into metadata and helped with plot direction
 
-- Clarissa: Captain
+Austin: Git Guru
 
+- Solved merge conflicts, resurrected plots, and kept the team afloat
 
-- Cullen: ggplot Wizard
+Clarissa: Code Captain
+
+- Created the code and styled plots
+
+Cullen: Plot Pundit
+
+- Produced all custom ggplot themes and features
 
 ---
 
