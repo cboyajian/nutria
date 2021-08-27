@@ -55,7 +55,7 @@ style_duo(primary_color = "#1F4257", secondary_color = "#F97B64")
 
 **- Creating a GitHub repository**
   - Created GitHub repository on Clarissa's github
-    https://github.com/cboyajian/nutria
+  - https://github.com/cboyajian/nutria
   - Invited Alex, Cullen, and Austen to be collaborators
 
 **- Saving the data** 
@@ -105,7 +105,7 @@ library(patchwork)
 
 # Step 3: Reading & Munging the Data 
 
-```{r}
+```{r, results='hide', message=FALSE}
 # Listing what data files are available
 list.files(path = "/courses/EDS214/nutria/raw-data")
 ```
@@ -117,11 +117,11 @@ list.files(path = "/courses/EDS214/nutria/raw-data")
 ```{r}
 # Watershed 1
 bq1 <- read_csv(
-  "/courses/EDS214/nutria/raw-data/QuebradaCuenca1-Bisley.csv",
+  here("raw-data", "QuebradaCuenca1-Bisley.csv"),
   na = c("-9999", "-9999.00"), show_col_types = FALSE)
 
 bq2 <- read_csv( #<<
-  "/courses/EDS214/nutria/raw-data/QuebradaCuenca2-Bisley.csv", #<<
+  here("raw-data", "QuebradaCuenca2-Bisley.csv"), #<<
   na = c("-9999", "-9999.00"), show_col_types = FALSE) %>% #<<
   separate(col = Sample_Date, #<<
          into = c("Sample_Date", "time"), #<<
@@ -129,11 +129,11 @@ bq2 <- read_csv( #<<
   select(-time) #<<
 
 bq3 <- read_csv(
-  "/courses/EDS214/nutria/raw-data/QuebradaCuenca3-Bisley.csv", 
+  here("raw-data", "QuebradaCuenca3-Bisley.csv"), 
   na = c("-9999", "-9999.00"), show_col_types = FALSE)
 
 prm <- read_csv(
-  "/courses/EDS214/nutria/raw-data/RioMameyesPuenteRoto.csv", 
+  here("raw-data", "RioMameyesPuenteRoto.csv"), 
   na = c("-9999", "-9999.00"), show_col_types = FALSE)
 ```
 
@@ -163,9 +163,9 @@ stream_data <- rbind(bq1, bq2, bq3, prm) %>%
 
 ```{r include=FALSE}
 # Watershed 2
-qpb <- read_csv("/courses/EDS214/nutria/raw-data/QuebradaPrieta-B.csv", na = c("-9999", "-9999.00"))
-qpa <- read_csv("/courses/EDS214/nutria/raw-data/QuebradaPrieta-A.csv", na = c("-9999", "-9999.00"))
-qs <- read_csv("/courses/EDS214/nutria/raw-data/QuebradaSonadora.csv", na = c("-9999", "-9999.00"))
+qpb <- read_csv(here("raw-data", "QuebradaPrieta-B.csv"), na = c("-9999", "-9999.00"))
+qpa <- read_csv(here("raw-data", "QuebradaPrieta-A.csv"), na = c("-9999", "-9999.00"))
+qs <- read_csv(here("raw-data", "QuebradaSonadora.csv"), na = c("-9999", "-9999.00"))
 stream_data_2 <- rbind(qpb, qpa, qs) %>% 
   clean_names() %>% 
   select(sample_id, sample_date, no3, k, mg, ca, nh4_n) %>% 
@@ -280,9 +280,7 @@ plot_k_2 <- ggplot(data = stream_data, aes(x = sample_date, y = k / 2)) +
        linetype = "",
        tag = "(a)")  +
   theme_classic() +
-  theme(#axis.text.x = element_blank(),
-        #axis.title.x = element_blank(),
-        legend.position = c(0.9,0.4),
+  theme(legend.position = c(0.9,0.4),
         panel.border = element_rect(fill = NA, size = 1),
         plot.margin = margin(0, 0, 0, 0, "cm"),
         plot.tag.position = c(0.1, 0.75))
@@ -401,14 +399,6 @@ ggplot(data = stream_data_2, aes(x = sample_date, y = concentration, linetype = 
 
 ---
 
-# Repository 
-(just a link)
-
-
----
-
 # Thanks!
 
-Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
-
-The chakra comes from [remark.js](https://remarkjs.com), [**knitr**](https://yihui.org/knitr/), and [R Markdown](https://rmarkdown.rstudio.com).
+Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan), [**knitr**](https://yihui.org/knitr/), and [R Markdown](https://rmarkdown.rstudio.com).

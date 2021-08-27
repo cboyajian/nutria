@@ -5,7 +5,6 @@
     <meta charset="utf-8" />
     <meta name="author" content="Alex, Austin, Clarissa, Cullen" />
     <meta name="date" content="2021-08-27" />
-    <script src="presentation_files/header-attrs-2.10.6/header-attrs.js"></script>
     <link href="presentation_files/remark-css-0.0.1/ninjutsu.css" rel="stylesheet" />
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
@@ -59,7 +58,7 @@ class: center, middle, inverse, title-slide
 
 **- Creating a GitHub repository**
   - Created GitHub repository on Clarissa's github
-    https://github.com/cboyajian/nutria
+  - https://github.com/cboyajian/nutria
   - Invited Alex, Cullen, and Austen to be collaborators
 
 **- Saving the data** 
@@ -117,17 +116,6 @@ library(patchwork)
 list.files(path = "/courses/EDS214/nutria/raw-data")
 ```
 
-```
-##  [1] "BasicFieldData-Streams.csv"         "knb-lter-luq.20.4923052.report.xml"
-##  [3] "knb-lter-luq.20.4923052.txt"        "knb-lter-luq.20.4923052.xml"       
-##  [5] "manifest.txt"                       "QuebradaCuenca1-Bisley.csv"        
-##  [7] "QuebradaCuenca2-Bisley.csv"         "QuebradaCuenca3-Bisley.csv"        
-##  [9] "QuebradaGuaba.csv"                  "QuebradaPrieta-A.csv"              
-## [11] "QuebradaPrieta-B.csv"               "QuebradaPrieta.csv"                
-## [13] "QuebradaSonadora.csv"               "RioIcacos.csv"                     
-## [15] "RioMameyesGage.csv"                 "RioMameyesPuenteRoto.csv"
-```
-
 ---
 
 # Reading Data for Plot 1
@@ -136,11 +124,11 @@ list.files(path = "/courses/EDS214/nutria/raw-data")
 ```r
 # Watershed 1
 bq1 &lt;- read_csv(
-  "/courses/EDS214/nutria/raw-data/QuebradaCuenca1-Bisley.csv",
+  here("raw-data", "QuebradaCuenca1-Bisley.csv"),
   na = c("-9999", "-9999.00"), show_col_types = FALSE)
 
 *bq2 &lt;- read_csv(
-* "/courses/EDS214/nutria/raw-data/QuebradaCuenca2-Bisley.csv",
+* here("raw-data", "QuebradaCuenca2-Bisley.csv"),
 * na = c("-9999", "-9999.00"), show_col_types = FALSE) %&gt;%
 * separate(col = Sample_Date,
 *        into = c("Sample_Date", "time"),
@@ -148,11 +136,11 @@ bq1 &lt;- read_csv(
 * select(-time)
 
 bq3 &lt;- read_csv(
-  "/courses/EDS214/nutria/raw-data/QuebradaCuenca3-Bisley.csv", 
+  here("raw-data", "QuebradaCuenca3-Bisley.csv"), 
   na = c("-9999", "-9999.00"), show_col_types = FALSE)
 
 prm &lt;- read_csv(
-  "/courses/EDS214/nutria/raw-data/RioMameyesPuenteRoto.csv", 
+  here("raw-data", "RioMameyesPuenteRoto.csv"), 
   na = c("-9999", "-9999.00"), show_col_types = FALSE)
 ```
 
@@ -287,17 +275,9 @@ Expanding the search with a second watershed and more chemicals
 
 ---
 
-# Repository 
-(just a link)
-
-
----
-
 # Thanks!
 
-Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
-
-The chakra comes from [remark.js](https://remarkjs.com), [**knitr**](https://yihui.org/knitr/), and [R Markdown](https://rmarkdown.rstudio.com).
+Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan), [**knitr**](https://yihui.org/knitr/), and [R Markdown](https://rmarkdown.rstudio.com).
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
