@@ -15,7 +15,10 @@ knitr::opts_chunk$set(echo = FALSE)
 - **Reproduce the nitrate and potassium plot for Hurricane Hugo in Luquillo, Puerto Rico.**
 - Investigate broader hurricane impact on stream chemistry data.
 
-## Step 1: Save data, create repository (Project Set-up & Team Organization)
+## Project Set-up & Team Organization [Alex]
+
+
+## Step 1: Save data, create repository, repository structure [Clarissa]
 
 
 ## Step 2: Load libraries
@@ -33,22 +36,17 @@ library(lubridate)
 library(patchwork)
 ```
 
-## Step 3: Read & Munging Data
+## Step 3: Read & Munging Data [Cullen]
 
 
-## Step 4: Creating Initial Plots
+## Step 4: Creating Initial Plots [Austin]
 
 
-## Step 5: Beautify-ing Plots
+## Step 5: Beautify-ing Plots & Pair Programming [Clarissa]
 
 
-## Results
+## Results [Cullen]
 
 
-## Challenge
-
-
-## Repository
-
-
-
+## Repository 
+(just a link)
