@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <meta name="author" content="Alex, Austin, Clarissa, Cullen" />
     <meta name="date" content="2021-08-27" />
+    <script src="libs/header-attrs-2.10.6/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
   </head>
@@ -43,25 +44,37 @@ class: center, middle, inverse, title-slide
 
 We knew we'd need the standard libraries we've been working with for data wrangling and plotting. We started with tidyverse, here, and janitor.
 
-```
-## ── Attaching packages ──────────────────────────────────────────────────────────── tidyverse 1.3.1 ──
-```
-
-```
-## ✔ ggplot2 3.3.5     ✔ purrr   0.3.4
-## ✔ tibble  3.1.3     ✔ dplyr   1.0.7
-## ✔ tidyr   1.1.3     ✔ stringr 1.4.0
-## ✔ readr   2.0.0     ✔ forcats 0.5.1
+```r
+library(tidyverse)
 ```
 
 ```
-## ── Conflicts ─────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
+## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
 ```
 
 ```
-## here() starts at /home/alazar66/meds/eds214/nutria
+## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
+## ✓ tibble  3.1.3     ✓ dplyr   1.0.7
+## ✓ tidyr   1.1.3     ✓ stringr 1.4.0
+## ✓ readr   2.0.1     ✓ forcats 0.5.1
+```
+
+```
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+```
+
+```r
+library(here)
+```
+
+```
+## here() starts at /Users/cboyajian/github/nutria
+```
+
+```r
+library(janitor)
 ```
 
 ```
@@ -77,6 +90,10 @@ We knew we'd need the standard libraries we've been working with for data wrangl
 
 Later on in the data wrangling process, we realized we would need a few additional packages. `lubridate` facilitated the use of date data, and we used `patchwork` to compile faceted graphs.
 
+```r
+library(lubridate)
+```
+
 ```
 ## 
 ## Attaching package: 'lubridate'
@@ -86,6 +103,10 @@ Later on in the data wrangling process, we realized we would need a few addition
 ## The following objects are masked from 'package:base':
 ## 
 ##     date, intersect, setdiff, union
+```
+
+```r
+library(patchwork)
 ```
 
 ---
